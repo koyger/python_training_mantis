@@ -1,9 +1,9 @@
 {
   "web": {
-    "baseUrl": "http://localhost/mantisbt-1.2.20/"
+    "baseUrl": "http://localhost/mantisbt-1.2.20"
   },
 
-  "web": {
+  "login": {
     "username": "administrator",
     "password": "root"
   }
