@@ -32,7 +32,7 @@ class Application:
     def open_home_page(self):
         wd = self.wd
         if not (wd.current_url.endswith("/my_view_page.php") and
-                len(wd.find_elements_by_xpath("//td[contains(text(),'Logged')]")) > 0):
+                len(wd.find_elements_by_css_selector("span.label.hidden-xs.label-default.arrowed")) > 0):
             self.wd.get(self.base_url+"/my_view_page.php")
 
     def destroy(self):

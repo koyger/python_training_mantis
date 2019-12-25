@@ -4,16 +4,15 @@ from sys import maxsize
 
 class Project:
 
-    def __init__(self, id=None, name=None, status=None, enabled = None, viewstatus=None, description=None):
+    def __init__(self, id=None, name=None, status=None, viewstatus=None, description=None):
         self.id = id
         self.name = name
         self.status = status
-        self.enabled = enabled
         self.viewstatus = viewstatus
         self.description = description
 
     def __repr__(self):
-        return "%s:%s:%s:%s:%s:%s" % (self.id, self.name, self.status, self.enabled, self.viewstatus, self.description)
+        return "%s:%s:%s:%s:%s" % (self.id, self.name, self.status, self.viewstatus, self.description)
 
     def __eq__(self, other):
         s_name = self.clear(self.name)
