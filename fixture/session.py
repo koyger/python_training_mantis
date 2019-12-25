@@ -1,4 +1,4 @@
-import time
+# -*- coding: utf-8 -*-
 
 
 class SessionHelper:
@@ -29,14 +29,14 @@ class SessionHelper:
         wd = self.app.wd
         return len(wd.find_elements_by_xpath("//td[contains(text(),'Logged')]")) > 0
 
-    # def ensure_login(self, username, password):
-    #     self.app.open_home_page()
-    #     if self.is_logged_in():
-    #         if self.is_logged_in_as(username):
-    #             return
-    #         else:
-    #             self.logout()
-    #     self.login(username, password)
+    def ensure_login(self, username, password):
+        self.app.open_home_page()
+        if self.is_logged_in():
+            if self.is_logged_in_as(username):
+                return
+            else:
+                self.logout()
+        self.login(username, password)
 
     def is_logged_in_as(self, username):
         wd = self.app.wd
@@ -44,5 +44,5 @@ class SessionHelper:
 
     def get_logged_user(self):
         wd = self.app.wd
-        return wd.find_element_by_css_selector("span.italic").text
+        return wd.find_element_by_css_selector("span.label.hidden-xs.label-default.arrowed").text
 

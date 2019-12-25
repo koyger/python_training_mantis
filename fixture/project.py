@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 import time
-
-from selenium.webdriver.common.by import By
-
 from model.project import Project
 
 
@@ -41,6 +38,16 @@ class ProjectHelper:
         self.app.change_field_value("name", proj_to_add.name)
         self.app.change_field_value("description", proj_to_add.description)
         wd.find_element_by_xpath("//input[@value='Add Project']").click()
+        self.projects_cache = None
         time.sleep(2)
-        wd.refresh()
-        time.sleep(10)
+
+    def delete(self, proj_to_del):
+        wd = self.app.wd
+        pr_id = proj_to_del.id
+        wd.find_element_by_xpath("//a[contains(@href, 'manage_proj_edit_page.php?project_id=%s')]" % pr_id).click()
+        time.sleep(1)
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        time.sleep(1)
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        time.sleep(1)
+        self.projects_cache = None
