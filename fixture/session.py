@@ -48,3 +48,10 @@ class SessionHelper:
         wd = self.app.wd
         return wd.find_element_by_css_selector("ul.breadcrumb > li > a").text
 
+    def logout(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//div[@id='navbar-container']/div[2]/ul/li[3]/a/i[2]").click()
+        wd.find_element_by_link_text("Logout").click()
+        time.sleep(1)
+
+

@@ -11,4 +11,4 @@ $g_db_table_suffix          = 'mantis';
 
 $g_default_timezone       = 'Europe/Berlin';
 
-$g_crypto_master_salt     = '/9I8jgzpTT9xPB9X3EN2B+4lRgie1winTcy4HoDkONE=';
+$g_crypto_master_salt     = 'sGvGMDndm09KhxCCHIwg1fHQJArM156rxDe4nWr5RyA=';

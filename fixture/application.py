@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import re
 from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.project import ProjectHelper

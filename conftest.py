@@ -2,7 +2,7 @@
 import pytest
 import json
 import os.path
-# import ftputil
+import ftputil
 from fixture.application import Application
 fixture = None
 target = None
@@ -12,6 +12,8 @@ def load_config(file):
     global target
     if target is None:
         config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+        print("")
+        print("config_file_path = "+config_file_path)
         with open(config_file_path) as f:
             target = json.load(f)
     return target
@@ -49,21 +51,27 @@ def stop(request):
 #     request.addfinalizer(fin)
 #
 #
-# def install_server_conf(host, username, password):
-#     with ftputil.FTPHost(host, username, password) as remote:
-#         if remote.path.isfile("config_inc.php.bak"):
-#             remote.remove("config_inc.php.bak")
-#         if remote.path.isfile("config_inc.php"):
-#             remote.rename("config_inc.php", "config_inc.php.bak")
-#         remote.upload(os.path.join(os.path.dirname(__file__)), "resources/config_inc.php", "config_inc.php")
-#
-#
-# def restore_server_conf(host, username, password):
-#     with ftputil.FTPHost(host, username, password) as remote:
-#         if remote.path.isfile("config_inc.php.bak"):
-#             if remote.path.isfile("config_inc.php"):
-#                 remote.remove("config_inc.php")
-#             remote.rename("config_inc.php.bak", "config_inc.php")
+def install_server_conf(host, username, password):
+    with ftputil.FTPHost(host, username, password) as remote:
+        path_for_upload = os.path.join(os.path.dirname(__file__))
+        print("")
+        print("path_for_upload = "+path_for_upload)
+        if remote.path.isfile("config_inc.php.bak"):
+            remote.remove("config_inc.php.bak")
+        if remote.path.isfile("config_inc.php"):
+            remote.rename("config_inc.php", "config_inc.php.bak")
+        # path_for_upload = os.path.join(os.path.dirname(__file__))
+        # print("")
+        # print("path_for_upload = "+path_for_upload)
+        remote.upload(path_for_upload, "resources/config_inc.php", "config_inc.php")
+
+
+def restore_server_conf(host, username, password):
+    with ftputil.FTPHost(host, username, password) as remote:
+        if remote.path.isfile("config_inc.php.bak"):
+            if remote.path.isfile("config_inc.php"):
+                remote.remove("config_inc.php")
+            remote.rename("config_inc.php.bak", "config_inc.php")
 
 
 def pytest_addoption(parser):
