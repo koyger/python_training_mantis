@@ -31,7 +31,7 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        self.wd.get(self.base_url+"/my_view_page.php")
+        self.wd.get(self.base_url)
 
     def destroy(self):
         self.wd.quit()
@@ -42,5 +42,3 @@ class Application:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def clear(self, some_text):
-        return re.sub("[() -]", "", some_text)

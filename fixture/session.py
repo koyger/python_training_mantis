@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 
 
 class SessionHelper:
@@ -11,10 +12,11 @@ class SessionHelper:
         wd.find_element_by_name("username").click()
         wd.find_element_by_name("username").clear()
         wd.find_element_by_name("username").send_keys(username)
-        wd.find_element_by_xpath(u"//input[@value='Войти']").click()
+        wd.find_element_by_css_selector("input.width-40.pull-right.btn.btn-success.btn-inverse.bigger-110").click()
         wd.find_element_by_name("password").clear()
         wd.find_element_by_name("password").send_keys(password)
-        wd.find_element_by_xpath(u"//input[@value='Войти']").click()
+        wd.find_element_by_css_selector("input.width-40.pull-right.btn.btn-success.btn-inverse.bigger-110").click()
+
 
     def logout(self):
         wd = self.app.wd
@@ -44,5 +46,5 @@ class SessionHelper:
 
     def get_logged_user(self):
         wd = self.app.wd
-        return wd.find_element_by_css_selector("span.label.hidden-xs.label-default.arrowed").text
+        return wd.find_element_by_css_selector("ul.breadcrumb > li > a").text
 
