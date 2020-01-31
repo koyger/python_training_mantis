@@ -12,8 +12,6 @@ def load_config(file):
     global target
     if target is None:
         config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
-        print("")
-        print("config_file_path = "+config_file_path)
         with open(config_file_path) as f:
             target = json.load(f)
     return target
@@ -44,6 +42,9 @@ def stop(request):
 
 # @pytest.fixture(scope="session", autouse=True)
 # def configure_server(request, config):
+#     print("host = "+config['ftp']['host'])
+#     print("username = "+config['ftp']['username'])
+#     print("password = "+config['ftp']['password'])
 #     install_server_conf(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
 #
 #     def fin():
@@ -51,27 +52,33 @@ def stop(request):
 #     request.addfinalizer(fin)
 #
 #
-def install_server_conf(host, username, password):
-    with ftputil.FTPHost(host, username, password) as remote:
-        path_for_upload = os.path.join(os.path.dirname(__file__))
-        print("")
-        print("path_for_upload = "+path_for_upload)
-        if remote.path.isfile("config_inc.php.bak"):
-            remote.remove("config_inc.php.bak")
-        if remote.path.isfile("config_inc.php"):
-            remote.rename("config_inc.php", "config_inc.php.bak")
-        # path_for_upload = os.path.join(os.path.dirname(__file__))
-        # print("")
-        # print("path_for_upload = "+path_for_upload)
-        remote.upload(path_for_upload, "resources/config_inc.php", "config_inc.php")
-
-
-def restore_server_conf(host, username, password):
-    with ftputil.FTPHost(host, username, password) as remote:
-        if remote.path.isfile("config_inc.php.bak"):
-            if remote.path.isfile("config_inc.php"):
-                remote.remove("config_inc.php")
-            remote.rename("config_inc.php.bak", "config_inc.php")
+# def install_server_conf(host, username, password):
+#     with ftputil.FTPHost(host, username, password) as remote:
+#         # path_for_upload = os.path.join(os.path.dirname(__file__))
+#         path_for_upload = 'opt/lampp/htdocs/mantisbt-2.23.0/config'
+#         print("")
+#         print("path_for_upload = "+path_for_upload)
+#         remote.chdir(path_for_upload)
+#         if remote.path.isfile("config_inc.php.bak"):
+#             remote.remove("config_inc.php.bak")
+#         if remote.path.isfile("config_inc.php"):
+#             remote.rename("config_inc.php", "config_inc.php.bak")
+#         # path_for_upload = os.path.join(os.path.dirname(__file__))
+#         # print("")
+#         # print("path_for_upload = "+path_for_upload)
+#         remote.upload(path_for_upload, "resources/config_inc.php", "config_inc.php")
+#
+#
+# def restore_server_conf(host, username, password):
+#     with ftputil.FTPHost(host, username, password) as remote:
+#         path_for_upload = 'opt/lampp/htdocs/mantisbt-2.23.0/config'
+#         print("")
+#         print("path_for_upload = "+path_for_upload)
+#         remote.chdir(path_for_upload)
+#         if remote.path.isfile("config_inc.php.bak"):
+#             if remote.path.isfile("config_inc.php"):
+#                 remote.remove("config_inc.php")
+#             remote.rename("config_inc.php.bak", "config_inc.php")
 
 
 def pytest_addoption(parser):
