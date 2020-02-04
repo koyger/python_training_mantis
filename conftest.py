@@ -27,7 +27,7 @@ def app(request, config):
     global fixture
     browser = request.config.getoption("--browser")
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=config["web"]['baseUrl'])
+        fixture = Application(browser=browser, config=config)
     fixture.session.ensure_login(username=config['login']['username'], password=config['login']['password'])
     return fixture
 
@@ -42,9 +42,6 @@ def stop(request):
 
 @pytest.fixture(scope="session", autouse=True)
 def configure_server(request, config):
-    print("host = "+config['ftp']['host'])
-    print("username = "+config['ftp']['username'])
-    print("password = "+config['ftp']['password'])
     install_server_conf(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
 
     def fin():
@@ -55,7 +52,6 @@ def configure_server(request, config):
 def install_server_conf(host, username, password):
     with ftputil.FTPHost(host, username, password) as remote:
         remote.chdir('mantisbt-2.23.0/config')
-        print('INSTALL FUNC CHDIR to '+remote.getcwd())
         if remote.path.isfile("config_inc.php.bak"):
             remote.remove("config_inc.php.bak")
         if remote.path.isfile("config_inc.php"):
@@ -66,7 +62,6 @@ def install_server_conf(host, username, password):
 def restore_server_conf(host, username, password):
     with ftputil.FTPHost(host, username, password) as remote:
         remote.chdir('mantisbt-2.23.0/config')
-        print('RESTORE FUNC CHDIR to '+remote.getcwd())
         if remote.path.isfile("config_inc.php.bak"):
             if remote.path.isfile("config_inc.php"):
                 remote.remove("config_inc.php")
