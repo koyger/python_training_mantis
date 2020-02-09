@@ -1,4 +1,6 @@
 from telnetlib import Telnet
+
+
 class JamesHelper:
 
     def __init__(self, app):
@@ -35,11 +37,9 @@ class JamesHelper:
             res = self.telnet.expect([b"exists", b"does not exist"])
             return res[0] == 0
 
-
         def create_user(self, username, password):
             self.write("adduser %s %s" % (username, password) + "\n")
             self.read_until("User %s added" % username)
-
 
         def reset_password(self, username, password):
             self.write("setpassword %s %s" % (username, password) + "\n")
@@ -47,5 +47,3 @@ class JamesHelper:
 
         def quit(self):
             self.write("quit\n")
-
-

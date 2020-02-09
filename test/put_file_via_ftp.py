@@ -5,7 +5,7 @@ import ftputil
 
 def put_file_via_ftp(host, username, password):
     with ftputil.FTPHost(host, username, password) as remote:
-        print("")
+        print("LOOKING FOR FILES/FOLDERS")
         list = remote.listdir(remote.curdir)
         for item in list:
             print("item : "+item)

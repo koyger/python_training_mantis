@@ -9,9 +9,9 @@ $g_signup_use_captcha     = OFF;
 $g_db_table_plugin_prefix   = 'mantis';
 $g_db_table_suffix          = 'mantis';
 
-$g_default_timezone       = 'Europe/Berlin';
+$g_default_timezone       = 'Europe/Moscow';
 
-$g_crypto_master_salt     = 'NyPjP3tNiGwJ3uAanq8B5gBTtFeqAAuXz9yeRNVr+7Y=';
+$g_crypto_master_salt     = 'FCk5Lo6U4Bpmc0rxs9XTFBcZ+YiCJs0QGvYodF9I7Z8=';
 $g_phpMailer_method = PHPMAILER_METHOD_SMTP;
 $g_smtp_port = '25';
 $g_smtp_host = 'localhost';

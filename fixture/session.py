@@ -17,7 +17,6 @@ class SessionHelper:
         wd.find_element_by_name("password").send_keys(password)
         wd.find_element_by_css_selector("input.width-40.pull-right.btn.btn-success.btn-inverse.bigger-110").click()
 
-
     def logout(self):
         wd = self.app.wd
         wd.find_element_by_link_text("Logout").click()
