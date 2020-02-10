@@ -17,9 +17,9 @@ class SessionHelper:
         wd.find_element_by_name("password").send_keys(password)
         wd.find_element_by_css_selector("input.width-40.pull-right.btn.btn-success.btn-inverse.bigger-110").click()
 
-    def logout(self):
-        wd = self.app.wd
-        wd.find_element_by_link_text("Logout").click()
+    # def logout(self):
+    #     wd = self.app.wd
+    #     wd.find_element_by_link_text("Logout").click()
 
     def ensure_logout(self):
         self.app.open_home_page()
@@ -40,17 +40,17 @@ class SessionHelper:
         self.login(username, password)
 
     def is_logged_in_as(self, username):
-        wd = self.app.wd
-        return self.get_logged_user() == username
+        scanned_name = self.get_logged_user()
+        return scanned_name == username
 
     def get_logged_user(self):
         wd = self.app.wd
-        return wd.find_element_by_css_selector("ul.breadcrumb > li > a").text
+        logged_name = wd.find_element_by_css_selector("ul.breadcrumb > li > a").text
+        return logged_name
 
     def logout(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//div[@id='navbar-container']/div[2]/ul/li[3]/a/i[2]").click()
-        wd.find_element_by_link_text("Logout").click()
+        wd.find_element_by_xpath("//div[@id='navbar-container']/div[2]/ul/li[3]/ul/li[4]/a/i").click()
         time.sleep(1)
-
 

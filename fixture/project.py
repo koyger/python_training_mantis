@@ -10,7 +10,7 @@ class ProjectHelper:
 
     def open_projects_page(self):
         wd = self.app.wd
-        wd.get("http://localhost/mantisbt-2.23.0/manage_proj_page.php")
+        wd.get(self.app.base_url+"/manage_proj_page.php")
         time.sleep(1)
 
     projects_cache = None
