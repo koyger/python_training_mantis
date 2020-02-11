@@ -14,3 +14,16 @@ def test_add_project(app):
     assert len(old_projects_list) == len(new_projects_list)-1
     old_projects_list.append(project_to_add)
     assert sorted(old_projects_list, key=Project.id_or_max) == sorted(new_projects_list, key=Project.id_or_max)
+
+
+def test_add_project_soap(app):
+    app.project.open_projects_page()
+    old_projects_list = app.soap.projects_list("administrator", "root")
+    project_to_add = Project(name=("Project " + str(datetime.now().strftime("%m_%d %H:%M:%S"))+" checked vs SOAP"),
+                             description="Project Description")
+    app.project.create(project_to_add)
+    app.project.open_projects_page()
+    new_projects_list = app.soap.projects_list("administrator", "root")
+    assert len(old_projects_list) == len(new_projects_list) - 1
+    old_projects_list.append(project_to_add)
+    assert sorted(old_projects_list, key=Project.id_or_max) == sorted(new_projects_list, key=Project.id_or_max)
