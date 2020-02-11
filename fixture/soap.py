@@ -27,4 +27,4 @@ class SoapHelper:
                 pr_list.append(scanned_project)
             return pr_list
         except WebFault:
-            return pr_list
+            return None
